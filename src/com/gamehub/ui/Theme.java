@@ -50,6 +50,13 @@ public final class Theme {
         button.setBackground(PRIMARY);
         button.setForeground(Color.WHITE);
         button.setBorder(new EmptyBorder(10, 14, 10, 14));
+
+        button.setContentAreaFilled(true);
+        button.setOpaque(true);
+        button.setBorderPainted(false);
+
+
+
         return button;
     }
 

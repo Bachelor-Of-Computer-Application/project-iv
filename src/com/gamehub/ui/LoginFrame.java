@@ -2,6 +2,8 @@ package com.gamehub.ui;
 
 import com.gamehub.auth.AuthService;
 import com.gamehub.model.User;
+import java.awt.Color;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,10 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.sql.SQLException;
 
 public class LoginFrame extends JFrame {
@@ -46,9 +45,14 @@ public class LoginFrame extends JFrame {
         addRow(form, c, 2, "Full name", fullName);
         addRow(form, c, 3, "Password", password);
 
-        JButton login = Theme.button("Login");
-        JButton register = Theme.button("Register");
-        register.setBackground(Theme.ACCENT);
+        JButton login = Theme.button("Login Here");
+        login.setBackground(new Color(128, 0, 128));
+        login.setForeground(Color.WHITE);
+        login.setOpaque(true);
+        login.setContentAreaFilled(true);
+        login.setBorderPainted(false);
+        JButton register = Theme.button("Register Here");
+        register.setBackground(new Color(192 , 192, 192));
         login.addActionListener(e -> login());
         register.addActionListener(e -> register());
 

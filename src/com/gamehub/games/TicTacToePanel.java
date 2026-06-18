@@ -50,8 +50,12 @@ public class TicTacToePanel extends JPanel {
         if (finishIfNeeded()) {
             return;
         }
-        computerMove();
-        finishIfNeeded();
+        javax.swing.Timer timer = new javax.swing.Timer(300, e -> {
+            computerMove();
+            finishIfNeeded();
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     private void computerMove() {
