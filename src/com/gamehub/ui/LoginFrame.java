@@ -48,11 +48,9 @@ public class LoginFrame extends JFrame {
         JButton login = Theme.button("Login Here");
         login.setBackground(new Color(128, 0, 128));
         login.setForeground(Color.WHITE);
-        login.setOpaque(true);
-        login.setContentAreaFilled(true);
-        login.setBorderPainted(false);
         JButton register = Theme.button("Register Here");
-        register.setBackground(new Color(192 , 192, 192));
+        register.setBackground(new Color(192, 192 , 192));
+//        register.setBackground(Theme.ACCENT);  // this is a root color of buttons
         login.addActionListener(e -> login());
         register.addActionListener(e -> register());
 
