@@ -27,6 +27,8 @@ public class BlueDinoRunnerPanel extends JPanel {
     private int timerDelay;
     private int jumpPower;
     private final JLabel scoreLabel = new JLabel("Score: 0");
+    private final JLabel levelLabel = new JLabel();
+    private String currentLevel = "Medium";
 
     public BlueDinoRunnerPanel(User user, ScoreService scoreService) {
         this.user = user;
@@ -40,11 +42,13 @@ public class BlueDinoRunnerPanel extends JPanel {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 levels,
-                levels[1]);
+                levels[0]);
 
         if (level == null) {
             level = "Medium";
         }
+
+        currentLevel = level;
 
         switch (level) {
             case "Easy":
@@ -65,11 +69,16 @@ public class BlueDinoRunnerPanel extends JPanel {
                 jumpPower = -18;
                 break;
         }
+        levelLabel.setText("Level: " + currentLevel);
         setLayout(null);
         setBackground(new Color(227, 244, 255));
         scoreLabel.setBounds(20, 15, 180, 30);
         scoreLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
         add(scoreLabel);
+        levelLabel.setBounds(220, 15, 180, 30);
+        levelLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        levelLabel.setText("Level: " + currentLevel);
+        add(levelLabel);
         JButton restart = new JButton("Restart");
         restart.setBounds(680, 15, 100, 30);
         restart.addActionListener(e -> restart());
