@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -22,11 +23,48 @@ public class BlueDinoRunnerPanel extends JPanel {
     private int obstacleX = 760;
     private int score = 0;
     private boolean running = true;
+    private int obstacleSpeed;
+    private int timerDelay;
+    private int jumpPower;
     private final JLabel scoreLabel = new JLabel("Score: 0");
 
     public BlueDinoRunnerPanel(User user, ScoreService scoreService) {
         this.user = user;
         this.scoreService = scoreService;
+        String[] levels = {"Easy", "Medium", "Hard"};
+
+        String level = (String) JOptionPane.showInputDialog(
+                null,
+                "Choose Difficulty",
+                "Blue Dino Runner",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                levels,
+                levels[1]);
+
+        if (level == null) {
+            level = "Medium";
+        }
+
+        switch (level) {
+            case "Easy":
+                obstacleSpeed = 5;
+                timerDelay = 30;
+                jumpPower = -18;
+                break;
+
+            case "Medium":
+                obstacleSpeed = 8;
+                timerDelay = 24;
+                jumpPower = -18;
+                break;
+
+            case "Hard":
+                obstacleSpeed = 12;
+                timerDelay = 18;
+                jumpPower = -18;
+                break;
+        }
         setLayout(null);
         setBackground(new Color(227, 244, 255));
         scoreLabel.setBounds(20, 15, 180, 30);
@@ -41,11 +79,11 @@ public class BlueDinoRunnerPanel extends JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE && dinoY == 340 && running) {
-                    velocity = -18;
+                    velocity = jumpPower;
                 }
             }
         });
-        timer = new Timer(24, e -> update());
+        timer = new Timer(timerDelay, e -> update());;
         timer.start();
     }
 
@@ -60,7 +98,7 @@ public class BlueDinoRunnerPanel extends JPanel {
             dinoY = 340;
             velocity = 0;
         }
-        obstacleX -= 8;
+        obstacleX -= obstacleSpeed;
         if (obstacleX < -40) {
             obstacleX = 820;
         }
